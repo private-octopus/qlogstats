@@ -33,15 +33,17 @@ with open("qlog_index.txt",'w') as f1:
 
 href_parts = tx.split('href=\"')
 print("Found " + str(len(href_parts)) + " href parts")
-all_url = []
+nb_qlog_url = 0
 
 with open(qlog_list_file,'w') as f2:
     for href_part in href_parts:
         url_parts = href_part.split('\">')
         url_dots = url_parts[0].split('.')
-        if len(url_dots) > 0 and url_dots[len(url_dots) - 1] == 'qlog':
+        if len(url_dots) > 0 and url_dots[len(url_dots) - 1] == 'qlog' and not "qvis" in url_parts[0] :
             qlog_url = url_parts[0]
             if not qlog_url.startswith("http"):
                 qlog_url = qlog_index_url + qlog_url
-            all_url.append(qlog_url)
             f2.write(qlog_url+"\n")
+            nb_qlog_url += 1
+
+print("Parsed " + str(nb_qlog_url) + " URLs.")

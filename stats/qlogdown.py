@@ -59,3 +59,4 @@ except Exception as e:
     traceback.print_exc()
     print("Cannot load <" + file_name + ">, error: " + str(e));
 
+print("Downloaded " + str(downloaded) + " qlog files.")
